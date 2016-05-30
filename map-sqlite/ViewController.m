@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "DBManager.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    DBManager *dbmanager = [DBManager getSharedInstance];
+    BOOL success = [dbmanager saveData:@123.2 lng:@123.2 name:@"DB"];
+    if (success) {
+        NSLog(@"true");
+    }
 }
 
 - (void)didReceiveMemoryWarning {

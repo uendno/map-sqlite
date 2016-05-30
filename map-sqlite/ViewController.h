@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DBManager.h"
 @interface ViewController : UIViewController
 
 

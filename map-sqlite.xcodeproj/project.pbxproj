@@ -15,6 +15,9 @@
 		7ACA1B211CFC2BAC006785AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ACA1B1F1CFC2BAC006785AD /* LaunchScreen.storyboard */; };
 		7ACA1B2C1CFC2BAC006785AD /* map_sqliteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA1B2B1CFC2BAC006785AD /* map_sqliteTests.m */; };
 		7ACA1B371CFC2BAC006785AD /* map_sqliteUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA1B361CFC2BAC006785AD /* map_sqliteUITests.m */; };
+		7ACA1B451CFC2BD1006785AD /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 7ACA1B441CFC2BD1006785AD /* Podfile */; };
+		7ACA1B471CFC3929006785AD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACA1B461CFC3929006785AD /* libsqlite3.tbd */; };
+		7ACA1B4A1CFC3955006785AD /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA1B491CFC3955006785AD /* DBManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,10 @@
 		7ACA1B321CFC2BAC006785AD /* map-sqliteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "map-sqliteUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ACA1B361CFC2BAC006785AD /* map_sqliteUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = map_sqliteUITests.m; sourceTree = "<group>"; };
 		7ACA1B381CFC2BAC006785AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7ACA1B441CFC2BD1006785AD /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		7ACA1B461CFC3929006785AD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		7ACA1B481CFC3955006785AD /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		7ACA1B491CFC3955006785AD /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ACA1B471CFC3929006785AD /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +89,8 @@
 		7ACA1B051CFC2BAC006785AD = {
 			isa = PBXGroup;
 			children = (
+				7ACA1B461CFC3929006785AD /* libsqlite3.tbd */,
+				7ACA1B441CFC2BD1006785AD /* Podfile */,
 				7ACA1B101CFC2BAC006785AD /* map-sqlite */,
 				7ACA1B2A1CFC2BAC006785AD /* map-sqliteTests */,
 				7ACA1B351CFC2BAC006785AD /* map-sqliteUITests */,
@@ -110,6 +120,8 @@
 				7ACA1B1F1CFC2BAC006785AD /* LaunchScreen.storyboard */,
 				7ACA1B221CFC2BAC006785AD /* Info.plist */,
 				7ACA1B111CFC2BAC006785AD /* Supporting Files */,
+				7ACA1B481CFC3955006785AD /* DBManager.h */,
+				7ACA1B491CFC3955006785AD /* DBManager.m */,
 			);
 			path = "map-sqlite";
 			sourceTree = "<group>";
@@ -207,6 +219,7 @@
 				TargetAttributes = {
 					7ACA1B0D1CFC2BAC006785AD = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = S8Q2VYLKGV;
 					};
 					7ACA1B261CFC2BAC006785AD = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -245,6 +258,7 @@
 			files = (
 				7ACA1B211CFC2BAC006785AD /* LaunchScreen.storyboard in Resources */,
 				7ACA1B1E1CFC2BAC006785AD /* Assets.xcassets in Resources */,
+				7ACA1B451CFC2BD1006785AD /* Podfile in Resources */,
 				7ACA1B1C1CFC2BAC006785AD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +287,7 @@
 				7ACA1B191CFC2BAC006785AD /* ViewController.m in Sources */,
 				7ACA1B161CFC2BAC006785AD /* AppDelegate.m in Sources */,
 				7ACA1B131CFC2BAC006785AD /* main.m in Sources */,
+				7ACA1B4A1CFC3955006785AD /* DBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "map-sqlite/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.savvycomsoftware.map-sqlite";
@@ -426,6 +442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "map-sqlite/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.savvycomsoftware.map-sqlite";
