@@ -10,10 +10,20 @@
 		38662AEE363B3AD4C11F62BD /* libPods-map-sqliteUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3F14A7F6ABA2015EF815E89 /* libPods-map-sqliteUITests.a */; };
 		3C20D788836C29C0E47B76DD /* libPods-map-sqliteTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A42A5E4F318E2119EE592DBC /* libPods-map-sqliteTests.a */; };
 		51C5FA656C2C07FBECF72044 /* libPods-map-sqlite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E887BEEB6C3732612B93A5EC /* libPods-map-sqlite.a */; };
+		7A90D0891CFE859600486411 /* LocationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A90D0881CFE859600486411 /* LocationsTableViewController.m */; };
+		7A90D08F1CFE8ADF00486411 /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A90D08E1CFE8ADF00486411 /* LocationCell.m */; };
+		7A90D0921CFE918B00486411 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A90D0911CFE918B00486411 /* MapViewController.m */; };
+		7A90D0971CFE982D00486411 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A90D0951CFE982D00486411 /* Main.storyboard */; };
+		7A90D09D1CFECC2A00486411 /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A90D09C1CFECC2A00486411 /* InfoWindow.xib */; };
+		7A90D09F1CFECE6000486411 /* InfoBubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A90D09E1CFECE6000486411 /* InfoBubble.png */; };
+		7A90D0A21CFECF6400486411 /* InfoWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A90D0A11CFECF6400486411 /* InfoWindow.m */; };
+		7A90D0A41CFED60600486411 /* InfoBubble2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A90D0A31CFED60600486411 /* InfoBubble2.png */; };
+		7A90D0A61CFEDB0500486411 /* InfoBubble3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A90D0A51CFEDB0500486411 /* InfoBubble3.png */; };
+		7A90D0A81CFEDBBD00486411 /* landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A90D0A71CFEDBBD00486411 /* landscape.png */; };
+		7A94FD671CFE7E9000DF756C /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A94FD661CFE7E9000DF756C /* Location.m */; };
 		7ACA1B131CFC2BAC006785AD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA1B121CFC2BAC006785AD /* main.m */; };
 		7ACA1B161CFC2BAC006785AD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA1B151CFC2BAC006785AD /* AppDelegate.m */; };
 		7ACA1B191CFC2BAC006785AD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA1B181CFC2BAC006785AD /* ViewController.m */; };
-		7ACA1B1C1CFC2BAC006785AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ACA1B1A1CFC2BAC006785AD /* Main.storyboard */; };
 		7ACA1B1E1CFC2BAC006785AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ACA1B1D1CFC2BAC006785AD /* Assets.xcassets */; };
 		7ACA1B211CFC2BAC006785AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ACA1B1F1CFC2BAC006785AD /* LaunchScreen.storyboard */; };
 		7ACA1B2C1CFC2BAC006785AD /* map_sqliteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA1B2B1CFC2BAC006785AD /* map_sqliteTests.m */; };
@@ -44,13 +54,28 @@
 		1FAEDCA08F93134C74F2D4A2 /* Pods-map-sqlite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-map-sqlite.release.xcconfig"; path = "Pods/Target Support Files/Pods-map-sqlite/Pods-map-sqlite.release.xcconfig"; sourceTree = "<group>"; };
 		4389F6BF6C988D3A7AFECC36 /* Pods-map-sqliteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-map-sqliteUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-map-sqliteUITests/Pods-map-sqliteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		4DBD9F1F3AB3B1D4377676A3 /* Pods-map-sqliteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-map-sqliteUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-map-sqliteUITests/Pods-map-sqliteUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7A90D0871CFE859600486411 /* LocationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "\U0010LocationsTableViewController.h"; sourceTree = "<group>"; };
+		7A90D0881CFE859600486411 /* LocationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "\U0010LocationsTableViewController.m"; sourceTree = "<group>"; };
+		7A90D08D1CFE8ADF00486411 /* LocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
+		7A90D08E1CFE8ADF00486411 /* LocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
+		7A90D0901CFE918B00486411 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		7A90D0911CFE918B00486411 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		7A90D0961CFE982D00486411 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7A90D09C1CFECC2A00486411 /* InfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoWindow.xib; sourceTree = "<group>"; };
+		7A90D09E1CFECE6000486411 /* InfoBubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoBubble.png; sourceTree = "<group>"; };
+		7A90D0A01CFECF6400486411 /* InfoWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoWindow.h; sourceTree = "<group>"; };
+		7A90D0A11CFECF6400486411 /* InfoWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoWindow.m; sourceTree = "<group>"; };
+		7A90D0A31CFED60600486411 /* InfoBubble2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoBubble2.png; sourceTree = "<group>"; };
+		7A90D0A51CFEDB0500486411 /* InfoBubble3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoBubble3.png; sourceTree = "<group>"; };
+		7A90D0A71CFEDBBD00486411 /* landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landscape.png; sourceTree = "<group>"; };
+		7A94FD651CFE7E9000DF756C /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		7A94FD661CFE7E9000DF756C /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		7ACA1B0E1CFC2BAC006785AD /* map-sqlite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "map-sqlite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ACA1B121CFC2BAC006785AD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7ACA1B141CFC2BAC006785AD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7ACA1B151CFC2BAC006785AD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7ACA1B171CFC2BAC006785AD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		7ACA1B181CFC2BAC006785AD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		7ACA1B1B1CFC2BAC006785AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7ACA1B1D1CFC2BAC006785AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7ACA1B201CFC2BAC006785AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7ACA1B221CFC2BAC006785AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -127,6 +152,10 @@
 		7ACA1B051CFC2BAC006785AD = {
 			isa = PBXGroup;
 			children = (
+				7A90D0A71CFEDBBD00486411 /* landscape.png */,
+				7A90D0A51CFEDB0500486411 /* InfoBubble3.png */,
+				7A90D0A31CFED60600486411 /* InfoBubble2.png */,
+				7A90D09E1CFECE6000486411 /* InfoBubble.png */,
 				7ACA1B461CFC3929006785AD /* libsqlite3.tbd */,
 				7ACA1B441CFC2BD1006785AD /* Podfile */,
 				7ACA1B101CFC2BAC006785AD /* map-sqlite */,
@@ -151,17 +180,28 @@
 		7ACA1B101CFC2BAC006785AD /* map-sqlite */ = {
 			isa = PBXGroup;
 			children = (
+				7A90D0951CFE982D00486411 /* Main.storyboard */,
 				7ACA1B141CFC2BAC006785AD /* AppDelegate.h */,
 				7ACA1B151CFC2BAC006785AD /* AppDelegate.m */,
 				7ACA1B171CFC2BAC006785AD /* ViewController.h */,
 				7ACA1B181CFC2BAC006785AD /* ViewController.m */,
-				7ACA1B1A1CFC2BAC006785AD /* Main.storyboard */,
 				7ACA1B1D1CFC2BAC006785AD /* Assets.xcassets */,
 				7ACA1B1F1CFC2BAC006785AD /* LaunchScreen.storyboard */,
 				7ACA1B221CFC2BAC006785AD /* Info.plist */,
 				7ACA1B111CFC2BAC006785AD /* Supporting Files */,
 				7ACA1B481CFC3955006785AD /* DBManager.h */,
 				7ACA1B491CFC3955006785AD /* DBManager.m */,
+				7A94FD651CFE7E9000DF756C /* Location.h */,
+				7A94FD661CFE7E9000DF756C /* Location.m */,
+				7A90D0871CFE859600486411 /* LocationsTableViewController.h */,
+				7A90D0881CFE859600486411 /* LocationsTableViewController.m */,
+				7A90D08D1CFE8ADF00486411 /* LocationCell.h */,
+				7A90D08E1CFE8ADF00486411 /* LocationCell.m */,
+				7A90D0901CFE918B00486411 /* MapViewController.h */,
+				7A90D0911CFE918B00486411 /* MapViewController.m */,
+				7A90D09C1CFECC2A00486411 /* InfoWindow.xib */,
+				7A90D0A01CFECF6400486411 /* InfoWindow.h */,
+				7A90D0A11CFECF6400486411 /* InfoWindow.m */,
 			);
 			path = "map-sqlite";
 			sourceTree = "<group>";
@@ -304,10 +344,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A90D09F1CFECE6000486411 /* InfoBubble.png in Resources */,
 				7ACA1B211CFC2BAC006785AD /* LaunchScreen.storyboard in Resources */,
 				7ACA1B1E1CFC2BAC006785AD /* Assets.xcassets in Resources */,
 				7ACA1B451CFC2BD1006785AD /* Podfile in Resources */,
-				7ACA1B1C1CFC2BAC006785AD /* Main.storyboard in Resources */,
+				7A90D0A81CFEDBBD00486411 /* landscape.png in Resources */,
+				7A90D0A41CFED60600486411 /* InfoBubble2.png in Resources */,
+				7A90D0A61CFEDB0500486411 /* InfoBubble3.png in Resources */,
+				7A90D0971CFE982D00486411 /* Main.storyboard in Resources */,
+				7A90D09D1CFECC2A00486411 /* InfoWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +501,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ACA1B191CFC2BAC006785AD /* ViewController.m in Sources */,
+				7A94FD671CFE7E9000DF756C /* Location.m in Sources */,
+				7A90D08F1CFE8ADF00486411 /* LocationCell.m in Sources */,
+				7A90D0921CFE918B00486411 /* MapViewController.m in Sources */,
+				7A90D0A21CFECF6400486411 /* InfoWindow.m in Sources */,
 				7ACA1B161CFC2BAC006785AD /* AppDelegate.m in Sources */,
+				7A90D0891CFE859600486411 /* LocationsTableViewController.m in Sources */,
 				7ACA1B131CFC2BAC006785AD /* main.m in Sources */,
 				7ACA1B4A1CFC3955006785AD /* DBManager.m in Sources */,
 			);
@@ -494,10 +544,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7ACA1B1A1CFC2BAC006785AD /* Main.storyboard */ = {
+		7A90D0951CFE982D00486411 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7ACA1B1B1CFC2BAC006785AD /* Base */,
+				7A90D0961CFE982D00486411 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
