@@ -12,7 +12,7 @@
 #import "LocationCell.h"
 #import "MapViewController.h"
 
-@interface _LocationsTableViewController () {
+@interface _LocationsTableViewController () <MapViewDelegate>{
     Location *_selectedLocation;
 }
 
@@ -99,8 +99,15 @@
     if ([[segue identifier] isEqualToString:@"showLocation"])
     {
         ((MapViewController *)segue.destinationViewController).location = _selectedLocation;
+        ((MapViewController *)segue.destinationViewController).delegate = self;
     }
 }
 
+#pragma mark - MapViewDelegate
+- (void)mapView:(MapViewController *)map andDeleteLocationID:(NSInteger)locationId {
+    NSLog(@"%ld",(long)locationId);
+    [self.locations removeObjectAtIndex:0];
+    [self.locationTableView reloadData];
+}
 
 @end

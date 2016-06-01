@@ -8,6 +8,7 @@
 
 #import "MapViewController.h"
 #import "InfoWindow.h"
+#import "DBManager.h"
 
 @interface MapViewController ()
 
@@ -63,4 +64,17 @@
 }
 */
 
+- (IBAction)deleteLocation:(id)sender {
+    
+    DBManager *dbManager = [DBManager getSharedInstance];
+    BOOL isSuccess = [dbManager deleteDataWithId:self.location.id];
+    if (isSuccess) {
+        NSLog(@"Deleted");
+        if ([self.delegate respondsToSelector:@selector(mapView:andDeleteLocationID:)]) {
+            [self.delegate mapView:self andDeleteLocationID:1];
+        }
+    } else {
+        NSLog(@"Not Deleted");
+    }
+}
 @end

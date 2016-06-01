@@ -15,7 +15,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LocationCell" rowHeight="53" id="NdI-sg-6dW" customClass="LocationCell">
-                                <rect key="frame" x="0.0" y="92" width="320" height="53"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="53"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NdI-sg-6dW" id="kD4-XT-bKR">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="52"/>
@@ -55,6 +55,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="RTi-5h-Znu"/>
                     <connections>
+                        <outlet property="locationTableView" destination="qna-E7-myt" id="0dX-7f-zzI"/>
                         <segue destination="1sV-Yd-q1i" kind="push" identifier="showLocation" id="K6b-M1-ZP8"/>
                     </connections>
                 </tableViewController>
@@ -87,14 +88,21 @@
                             <constraint firstAttribute="trailing" secondItem="l6p-bN-Q5o" secondAttribute="trailing" id="f7d-Qc-cGr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="BlH-gd-FPe"/>
+                    <navigationItem key="navigationItem" id="BlH-gd-FPe">
+                        <barButtonItem key="rightBarButtonItem" title="Delete" id="VVQ-ie-5UW">
+                            <connections>
+                                <action selector="deleteLocation:" destination="1sV-Yd-q1i" id="G5a-MP-g2c"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="l6p-bN-Q5o" id="2WQ-VO-i2V"/>
+                        <segue destination="ena-Sc-Vpr" kind="push" identifier="backToTable" id="ZnY-4o-UJ1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BqA-gV-gXe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="768" y="229"/>
+            <point key="canvasLocation" x="855" y="229"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="POe-s3-GX5">
@@ -113,4 +121,7 @@
             <point key="canvasLocation" x="-74" y="229"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ZnY-4o-UJ1"/>
+    </inferredMetricsTieBreakers>
 </document>

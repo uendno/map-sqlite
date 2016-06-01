@@ -11,5 +11,6 @@
 @interface _LocationsTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSMutableArray *locations;
+@property (nonatomic, strong) IBOutlet UITableView *locationTableView;
 
 @end
