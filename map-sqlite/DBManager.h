@@ -16,7 +16,7 @@
 
 + (DBManager *)getSharedInstance;
 -(BOOL) createDB;
--(BOOL) saveData: (Location *)location;
+-(NSNumber *) saveData: (Location *)location;
 -(NSMutableArray *)findById: (NSNumber *)id;
 -(NSMutableArray *)findAll;
 -(BOOL) deleteDataWithId: (NSNumber *)id;

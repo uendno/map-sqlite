@@ -61,7 +61,7 @@ static sqlite3_stmt *statement = nil;
     
     
 }
--(BOOL) saveData: (Location *)location;
+-(NSNumber *) saveData: (Location *)location;
 {
     const char *dbpath = [databasePath UTF8String];
     if(sqlite3_open(dbpath, &database) == SQLITE_OK) {
@@ -70,13 +70,13 @@ static sqlite3_stmt *statement = nil;
         sqlite3_prepare_v2(database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
             sqlite3_reset(statement);
-            return YES;
+            return [[NSNumber alloc] initWithLong: sqlite3_last_insert_rowid(database)];
         } else {
             sqlite3_reset(statement);
-            return NO;
+            return nil;
         }
     }
-    return NO;
+    return nil;
 }
 
 -(BOOL)deleteDataWithId:(NSNumber *)id {

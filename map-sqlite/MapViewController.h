@@ -14,7 +14,7 @@
 @protocol MapViewDelegate <NSObject>
 
 @optional
-- (void)mapView:(MapViewController*)map andDeleteLocationID:(NSInteger)locationId;
+- (void)deleteLocationID:(NSNumber *)locationId;
 
 @end
 

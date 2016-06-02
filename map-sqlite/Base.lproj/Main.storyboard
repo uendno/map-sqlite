@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Locations-->
         <scene sceneID="fGn-0c-xos">
             <objects>
                 <tableViewController id="ena-Sc-Vpr" customClass="_LocationsTableViewController" sceneMemberID="viewController">
@@ -24,19 +24,19 @@
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tnh-9q-PDY">
                                             <rect key="frame" x="14" y="0.0" width="273" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lng" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSo-uJ-O3c">
                                             <rect key="frame" x="136" y="22" width="106" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdq-kQ-39J">
                                             <rect key="frame" x="14" y="22" width="94" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -53,7 +53,13 @@
                             <outlet property="delegate" destination="ena-Sc-Vpr" id="sZk-2c-RU2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="RTi-5h-Znu"/>
+                    <navigationItem key="navigationItem" title="Locations" id="RTi-5h-Znu">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="nzx-SW-CGD">
+                            <connections>
+                                <action selector="addLocation:" destination="ena-Sc-Vpr" id="dPt-6k-9n1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="locationTableView" destination="qna-E7-myt" id="0dX-7f-zzI"/>
                         <segue destination="1sV-Yd-q1i" kind="push" identifier="showLocation" id="K6b-M1-ZP8"/>
@@ -61,7 +67,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hn0-aP-ji7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="352" y="229"/>
+            <point key="canvasLocation" x="352" y="239"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="RXz-gK-Xa6">
@@ -75,17 +81,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l6p-bN-Q5o" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l6p-bN-Q5o" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="81" width="320" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="l6p-bN-Q5o" firstAttribute="leading" secondItem="8bm-kS-2J8" secondAttribute="leading" id="8VM-Si-WeI"/>
-                            <constraint firstItem="T06-vH-gA8" firstAttribute="top" secondItem="l6p-bN-Q5o" secondAttribute="bottom" id="Nk7-iX-7lf"/>
-                            <constraint firstItem="l6p-bN-Q5o" firstAttribute="top" secondItem="N0v-9j-JPo" secondAttribute="bottom" id="cdm-op-gho"/>
-                            <constraint firstAttribute="trailing" secondItem="l6p-bN-Q5o" secondAttribute="trailing" id="f7d-Qc-cGr"/>
+                            <constraint firstItem="l6p-bN-Q5o" firstAttribute="top" secondItem="N0v-9j-JPo" secondAttribute="bottom" id="1aQ-HC-wmY"/>
+                            <constraint firstAttribute="trailing" secondItem="l6p-bN-Q5o" secondAttribute="trailing" id="D2v-BH-H26"/>
+                            <constraint firstItem="l6p-bN-Q5o" firstAttribute="leading" secondItem="8bm-kS-2J8" secondAttribute="leading" id="Gdy-x4-ls9"/>
+                            <constraint firstItem="T06-vH-gA8" firstAttribute="top" secondItem="l6p-bN-Q5o" secondAttribute="bottom" id="L4x-zt-58J"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BlH-gd-FPe">
@@ -102,7 +108,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BqA-gV-gXe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="855" y="229"/>
+            <point key="canvasLocation" x="834" y="639"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="POe-s3-GX5">

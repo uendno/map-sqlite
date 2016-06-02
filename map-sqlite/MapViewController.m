@@ -20,6 +20,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = self.location.name;
+    
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.location.latitude floatValue]
                                                             longitude:[self.location.longitude floatValue]
                                                                  zoom:15];
@@ -70,8 +72,11 @@
     BOOL isSuccess = [dbManager deleteDataWithId:self.location.id];
     if (isSuccess) {
         NSLog(@"Deleted");
-        if ([self.delegate respondsToSelector:@selector(mapView:andDeleteLocationID:)]) {
-            [self.delegate mapView:self andDeleteLocationID:1];
+        if ([self.delegate respondsToSelector:@selector(deleteLocationID:)]) {
+            [self.delegate deleteLocationID:self.location.id];
+            
+            //back to the root view
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
     } else {
         NSLog(@"Not Deleted");

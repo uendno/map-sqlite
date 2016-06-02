@@ -31,6 +31,7 @@
 		7ACA1B451CFC2BD1006785AD /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 7ACA1B441CFC2BD1006785AD /* Podfile */; };
 		7ACA1B471CFC3929006785AD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACA1B461CFC3929006785AD /* libsqlite3.tbd */; };
 		7ACA1B4A1CFC3955006785AD /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACA1B491CFC3955006785AD /* DBManager.m */; };
+		7ACE60DC1CFFCF6B00872958 /* PlacePickingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ACE60DB1CFFCF6B00872958 /* PlacePickingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,8 @@
 		7ACA1B461CFC3929006785AD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7ACA1B481CFC3955006785AD /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		7ACA1B491CFC3955006785AD /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		7ACE60DA1CFFCF6B00872958 /* PlacePickingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacePickingViewController.h; sourceTree = "<group>"; };
+		7ACE60DB1CFFCF6B00872958 /* PlacePickingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacePickingViewController.m; sourceTree = "<group>"; };
 		9E2552287C9DEEA05C5AC3C6 /* Pods-map-sqliteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-map-sqliteTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-map-sqliteTests/Pods-map-sqliteTests.release.xcconfig"; sourceTree = "<group>"; };
 		A42A5E4F318E2119EE592DBC /* libPods-map-sqliteTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-map-sqliteTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA0E83DD95443BC2990A5B61 /* Pods-map-sqlite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-map-sqlite.debug.xcconfig"; path = "Pods/Target Support Files/Pods-map-sqlite/Pods-map-sqlite.debug.xcconfig"; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				7A90D09C1CFECC2A00486411 /* InfoWindow.xib */,
 				7A90D0A01CFECF6400486411 /* InfoWindow.h */,
 				7A90D0A11CFECF6400486411 /* InfoWindow.m */,
+				7ACE60DA1CFFCF6B00872958 /* PlacePickingViewController.h */,
+				7ACE60DB1CFFCF6B00872958 /* PlacePickingViewController.m */,
 			);
 			path = "map-sqlite";
 			sourceTree = "<group>";
@@ -500,6 +505,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ACE60DC1CFFCF6B00872958 /* PlacePickingViewController.m in Sources */,
 				7ACA1B191CFC2BAC006785AD /* ViewController.m in Sources */,
 				7A94FD671CFE7E9000DF756C /* Location.m in Sources */,
 				7A90D08F1CFE8ADF00486411 /* LocationCell.m in Sources */,
