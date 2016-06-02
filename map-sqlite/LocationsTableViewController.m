@@ -16,6 +16,7 @@
     Location *_selectedLocation;
     GMSPlacePicker *_placePicker;
     GMSPlacesClient *_placesClient;
+    BOOL _isWaitingForPlacePicker;
 }
 
 @end
@@ -35,7 +36,7 @@
     //find all data
     DBManager *dbManager = [DBManager getSharedInstance];
     self.locations = [dbManager findAll];
-   
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -109,68 +110,77 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 #pragma mark - Add Data
 - (IBAction)addLocation:(id)sender {
     
-    _placesClient = [[GMSPlacesClient alloc] init];
-    
-    [_placesClient currentPlaceWithCallback:^(GMSPlaceLikelihoodList *
-                                              placeLikelihoodList,
-                                              NSError *error) {
-        if (error != nil) {
-            NSLog(@"Pick Place error %@", [error localizedDescription]);
-            return;
-        }
+    if (_isWaitingForPlacePicker == NO) {
         
-        if (placeLikelihoodList != nil) {
-            GMSPlace *currentPlace =
-            [[[placeLikelihoodList likelihoods] firstObject] place];
+        _isWaitingForPlacePicker = YES;
+        
+        _placesClient = [[GMSPlacesClient alloc] init];
+        
+        
+        [_placesClient currentPlaceWithCallback:^(GMSPlaceLikelihoodList *
+                                                  placeLikelihoodList,
+                                                  NSError *error) {
+            _isWaitingForPlacePicker = NO;
             
-            CLLocationCoordinate2D center;
-            
-            if (currentPlace != nil) {
-                
-                center = currentPlace.coordinate;
-            } else {
-                
-                center = CLLocationCoordinate2DMake(51.5108396, -0.0922251);
+            if (error != nil) {
+                NSLog(@"Pick Place error %@", [error localizedDescription]);
+                return;
             }
             
-            CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(
-                                                                          center.latitude + 0.001, center.longitude + 0.001);
-            CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(
-                                                                          center.latitude - 0.001, center.longitude - 0.001);
-            GMSCoordinateBounds *viewport =
-            [[GMSCoordinateBounds alloc] initWithCoordinate:northEast
-                                                 coordinate:southWest];
-            
-            GMSPlacePickerConfig *config =
-            [[GMSPlacePickerConfig alloc] initWithViewport:viewport];
-            
-            _placePicker = [[GMSPlacePicker alloc] initWithConfig:config];
-            
-            [_placePicker pickPlaceWithCallback:^(GMSPlace *place, NSError *error) {
-                if (error != nil) {
-                    NSLog(@"Pick Place error %@", [error localizedDescription]);
-                    return;
+            if (placeLikelihoodList != nil) {
+                GMSPlace *currentPlace =
+                [[[placeLikelihoodList likelihoods] firstObject] place];
+                
+                CLLocationCoordinate2D center;
+                
+                if (currentPlace != nil) {
+                    
+                    center = currentPlace.coordinate;
+                } else {
+                    
+                    center = CLLocationCoordinate2DMake(51.5108396, -0.0922251);
                 }
                 
-                if (place != nil) {
+                CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(
+                                                                              center.latitude + 0.001, center.longitude + 0.001);
+                CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(
+                                                                              center.latitude - 0.001, center.longitude - 0.001);
+                GMSCoordinateBounds *viewport =
+                [[GMSCoordinateBounds alloc] initWithCoordinate:northEast
+                                                     coordinate:southWest];
+                
+                GMSPlacePickerConfig *config =
+                [[GMSPlacePickerConfig alloc] initWithViewport:viewport];
+                
+                _placePicker = [[GMSPlacePicker alloc] initWithConfig:config];
+                
+                [_placePicker pickPlaceWithCallback:^(GMSPlace *place, NSError *error) {
+                    if (error != nil) {
+                        NSLog(@"Pick Place error %@", [error localizedDescription]);
+                        return;
+                    }
                     
-                    Location *location = [[Location alloc] init];
-                    location.name = place.name;
-                    location.latitude = [[NSNumber alloc] initWithFloat:place.coordinate.latitude];
-                    location.longitude = [[NSNumber alloc] initWithFloat:place.coordinate.longitude];
-                    
-                    DBManager *dbManager = [DBManager getSharedInstance];
-                    location.id = [dbManager saveData:location];
-                    
-                    [self.locations addObject:location];
-                    [self.locationTableView reloadData];
-                    
-                } else {
-                    NSLog(@"No place selected");
-                }
-            }];
-        }
-        
-    }];
-}
+                    if (place != nil) {
+                        
+                        Location *location = [[Location alloc] init];
+                        location.name = place.name;
+                        location.latitude = [[NSNumber alloc] initWithFloat:place.coordinate.latitude];
+                        location.longitude = [[NSNumber alloc] initWithFloat:place.coordinate.longitude];
+                        
+                        DBManager *dbManager = [DBManager getSharedInstance];
+                        location.id = [dbManager saveData:location];
+                        
+                        [self.locations addObject:location];
+                        [self.locationTableView reloadData];
+                        
+                    } else {
+                        NSLog(@"No place selected");
+                    }
+                }];
+            }
+            
+        }];
+
+    }
+    }
 @end

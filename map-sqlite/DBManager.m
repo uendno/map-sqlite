@@ -122,7 +122,7 @@ static sqlite3_stmt *statement = nil;
 -(NSMutableArray *)findById: (NSNumber *)id {
     const char *dbpath = [databasePath UTF8String];
     if(sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querrySQL = [NSString stringWithFormat:@"select * from latlng where _id = %ld",[id integerValue]];
+        NSString *querrySQL = [NSString stringWithFormat:@"select * from latlng where _id = %ld",(long)[id integerValue]];
         const char *query_stmt = [querrySQL UTF8String];
         NSMutableArray *resultArray = [[NSMutableArray alloc] init];
         if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
