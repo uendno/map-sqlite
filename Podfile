@@ -7,6 +7,7 @@ target 'map-sqlite' do
 
   # Pods for map-sqlite
 pod 'GoogleMaps'
+pod 'AFNetworking'
 
   target 'map-sqliteTests' do
     inherit! :search_paths

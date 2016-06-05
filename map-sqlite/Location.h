@@ -18,4 +18,6 @@
 
 @property (strong, nonatomic) NSNumber *longitude;
 
+@property (strong, nonatomic) NSString *addressLine;
+
 @end

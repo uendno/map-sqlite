@@ -7,7 +7,6 @@
 //
 #import "DBManager.h"
 
-
 static DBManager *sharedInstance = nil;
 static sqlite3 *database = nil;
 static sqlite3_stmt *statement = nil;
@@ -24,16 +23,18 @@ static sqlite3_stmt *statement = nil;
     }
     return sharedInstance;
 }
--(BOOL) createDB {
+- (BOOL)createDB {
     NSString *docsDir;
     NSArray *dirPath;
     
-    //Get the document directory
-    dirPath =  NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    // Get the document directory
+    dirPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                  NSUserDomainMask, YES);
     docsDir = dirPath[0];
     
-    //Build the path to the database file
-    databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingString:@"locations.db"]];
+    // Build the path to the database file
+    databasePath = [[NSString alloc]
+                    initWithString:[docsDir stringByAppendingString:@"/locations.db"]];
     
     NSLog(@"%@", databasePath);
     
@@ -43,11 +44,12 @@ static sqlite3_stmt *statement = nil;
         const char *dbpath = [databasePath UTF8String];
         if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
             char *errMsg;
-            char *sql_stmt = "create table if not exists latlng (_id integer primary key AUTOINCREMENT, name text, latitude float, longitude float)";
-            if (sqlite3_exec(database, sql_stmt, NULL, NULL, &errMsg)!= SQLITE_OK) {
+            char *sql_stmt = "create table if not exists latlng (_id integer primary "
+            "key AUTOINCREMENT, name text,address text, latitude "
+            "float, longitude float)";
+            if (sqlite3_exec(database, sql_stmt, NULL, NULL, &errMsg) != SQLITE_OK) {
                 isSuccess = NO;
-                NSLog(@"%s",errMsg);
-                
+                NSLog(@"%s", errMsg);
             }
             sqlite3_close(database);
             return isSuccess;
@@ -58,19 +60,22 @@ static sqlite3_stmt *statement = nil;
     }
     
     return isSuccess;
-    
-    
 }
--(NSNumber *) saveData: (Location *)location;
+- (NSNumber *)saveData:(Location *)location;
 {
     const char *dbpath = [databasePath UTF8String];
-    if(sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *insertSQL = [NSString stringWithFormat:@"insert into latlng (name, latitude, longitude) values(\"%@\", %f, %f)", location.name, [location.latitude floatValue], [location.longitude floatValue]];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *insertSQL = [NSString
+                               stringWithFormat:@"insert into latlng (name, address, latitude, "
+                               @"longitude) values(\"%@\", \"%@\", %f, %f)",
+                               location.name, location.addressLine,
+                               [location.latitude floatValue],
+                               [location.longitude floatValue]];
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
             sqlite3_reset(statement);
-            return [[NSNumber alloc] initWithLong: sqlite3_last_insert_rowid(database)];
+            return [[NSNumber alloc] initWithLong:sqlite3_last_insert_rowid(database)];
         } else {
             sqlite3_reset(statement);
             return nil;
@@ -79,10 +84,11 @@ static sqlite3_stmt *statement = nil;
     return nil;
 }
 
--(BOOL)deleteDataWithId:(NSNumber *)id {
+- (BOOL)deleteDataWithId:(NSNumber *)id {
     const char *dbpath = [databasePath UTF8String];
-    if(sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *deleteSQL = [NSString stringWithFormat:@"delete from latlng where _id = %ld", [id longValue]];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *deleteSQL = [NSString
+                               stringWithFormat:@"delete from latlng where _id = %ld", [id longValue]];
         const char *delete_stmt = [deleteSQL UTF8String];
         
         NSLog(@"%s", delete_stmt);
@@ -101,10 +107,15 @@ static sqlite3_stmt *statement = nil;
     return NO;
 }
 
--(BOOL)updateData:(Location *)location {
+- (BOOL)updateData:(Location *)location {
     const char *dbpath = [databasePath UTF8String];
-    if(sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *updateSQL = [NSString stringWithFormat:@"update latlng set name=\"%@\", latitude=%f, longitude=%f where _id = %ld", location.name, [location.latitude floatValue], [location.longitude floatValue], [location.id longValue]];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *updateSQL = [NSString
+                               stringWithFormat:@"update latlng set name=\"%@\", latitude=%f, "
+                               @"longitude=%f where _id = %ld",
+                               location.name, [location.latitude floatValue],
+                               [location.longitude floatValue],
+                               [location.id longValue]];
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(database, update_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
@@ -118,32 +129,41 @@ static sqlite3_stmt *statement = nil;
     return NO;
 }
 
-
--(NSMutableArray *)findById: (NSNumber *)id {
+- (NSMutableArray *)findById:(NSNumber *)id {
     const char *dbpath = [databasePath UTF8String];
-    if(sqlite3_open(dbpath, &database) == SQLITE_OK) {
-        NSString *querrySQL = [NSString stringWithFormat:@"select * from latlng where _id = %ld",(long)[id integerValue]];
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
+        NSString *querrySQL =
+        [NSString stringWithFormat:@"select * from latlng where _id = %ld",
+         (long)[id integerValue]];
         const char *query_stmt = [querrySQL UTF8String];
         NSMutableArray *resultArray = [[NSMutableArray alloc] init];
-        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
+        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) ==
+            SQLITE_OK) {
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 
                 Location *location = [[Location alloc] init];
                 
-                NSNumber *id = [[NSNumber alloc] initWithFloat: (float) sqlite3_column_double(statement, 0)];
+                NSNumber *id = [[NSNumber alloc]
+                                initWithFloat:(float)sqlite3_column_double(statement, 0)];
                 location.id = id;
                 
-                NSString *name = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
+                NSString *name = [[NSString alloc]
+                                  initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
                 location.name = name;
                 
-                NSNumber *lat = [[NSNumber alloc] initWithFloat:(float)sqlite3_column_double(statement, 2)];
+                NSString *address = [[NSString alloc]
+                                     initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                location.addressLine = address;
+                
+                NSNumber *lat = [[NSNumber alloc]
+                                 initWithFloat:(float)sqlite3_column_double(statement, 4)];
                 location.latitude = lat;
                 
-                NSNumber *lng = [[NSNumber alloc] initWithFloat:(float)sqlite3_column_double(statement, 3)];
+                NSNumber *lng = [[NSNumber alloc]
+                                 initWithFloat:(float)sqlite3_column_double(statement, 5)];
                 location.longitude = lng;
                 
                 [resultArray addObject:location];
-            
             }
             sqlite3_reset(statement);
             
@@ -153,31 +173,38 @@ static sqlite3_stmt *statement = nil;
     return nil;
 }
 
--(NSMutableArray *)findAll {
+- (NSMutableArray *)findAll {
     const char *dbpath = [databasePath UTF8String];
-    if(sqlite3_open(dbpath, &database) == SQLITE_OK) {
+    if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         NSString *querrySQL = @"select * from latlng";
         const char *query_stmt = [querrySQL UTF8String];
         NSMutableArray *resultArray = [[NSMutableArray alloc] init];
-        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) == SQLITE_OK) {
+        if (sqlite3_prepare_v2(database, query_stmt, -1, &statement, NULL) ==
+            SQLITE_OK) {
             while (sqlite3_step(statement) == SQLITE_ROW) {
                 
                 Location *location = [[Location alloc] init];
-                
-                NSNumber *id = [[NSNumber alloc] initWithFloat: (float) sqlite3_column_double(statement, 0)];
+                NSNumber *id = [[NSNumber alloc]
+                                initWithFloat:(float)sqlite3_column_double(statement, 0)];
                 location.id = id;
                 
-                NSString *name = [[NSString alloc] initWithUTF8String:(const char *) sqlite3_column_text(statement, 1)];
+                NSString *name = [[NSString alloc]
+                                  initWithUTF8String:(const char *)sqlite3_column_text(statement, 1)];
                 location.name = name;
                 
-                NSNumber *lat = [[NSNumber alloc] initWithFloat:(float)sqlite3_column_double(statement, 2)];
+                NSString *address = [[NSString alloc]
+                                     initWithUTF8String:(const char *)sqlite3_column_text(statement, 2)];
+                location.addressLine = address;
+                
+                NSNumber *lat = [[NSNumber alloc]
+                                 initWithFloat:(float)sqlite3_column_double(statement, 4)];
                 location.latitude = lat;
                 
-                NSNumber *lng = [[NSNumber alloc] initWithFloat:(float)sqlite3_column_double(statement, 3)];
+                NSNumber *lng = [[NSNumber alloc]
+                                 initWithFloat:(float)sqlite3_column_double(statement, 5)];
                 location.longitude = lng;
                 
                 [resultArray addObject:location];
-                
             }
             sqlite3_reset(statement);
             
@@ -186,8 +213,5 @@ static sqlite3_stmt *statement = nil;
     }
     return nil;
 }
-
-
-
 
 @end

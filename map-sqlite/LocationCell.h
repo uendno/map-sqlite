@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface LocationCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UILabel *NameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *LatLabel;
-@property (strong, nonatomic) IBOutlet UILabel *LngLabel;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *addressLine;
 
 @end

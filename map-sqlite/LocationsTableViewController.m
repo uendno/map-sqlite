@@ -17,6 +17,7 @@
     GMSPlacePicker *_placePicker;
     GMSPlacesClient *_placesClient;
     BOOL _isWaitingForPlacePicker;
+    LocationCell *_sampleCell;
 }
 
 @end
@@ -33,10 +34,9 @@
     // bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    //find all data
+    // find all data
     DBManager *dbManager = [DBManager getSharedInstance];
     self.locations = [dbManager findAll];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,9 +66,8 @@
     // Configure the cell...
     
     Location *location = self.locations[indexPath.row];
-    cell.NameLabel.text = location.name;
-    cell.LatLabel.text = [location.latitude stringValue];
-    cell.LngLabel.text = [location.longitude stringValue];
+    cell.nameLabel.text = location.name;
+    cell.addressLine.text = location.addressLine;
     
     return cell;
 }
@@ -92,6 +91,30 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView
+heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // get a sample cell
+    if (!_sampleCell) {
+        _sampleCell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell"];
+    }
+    
+    // set it's data
+    Location *location = self.locations[indexPath.row];
+    _sampleCell.nameLabel.text = location.name;
+    _sampleCell.addressLine.text = location.addressLine;
+    
+    [_sampleCell layoutIfNeeded];
+    
+    // calulate the height of content view
+    CGFloat height =
+    [_sampleCell.contentView
+     systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    
+    // set height for cell = height of content view + height of separator (1.0f)
+    return height + 1.0f;
+}
+
 #pragma mark - MapViewDelegate
 - (void)deleteLocationID:(NSNumber *)locationId {
     NSLog(@"%ld", (long)locationId);
@@ -102,7 +125,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
             [dbManager deleteDataWithId:location.id];
             break;
         }
-        
     }
     [self.locationTableView reloadData];
 }
@@ -115,7 +137,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         _isWaitingForPlacePicker = YES;
         
         _placesClient = [[GMSPlacesClient alloc] init];
-        
         
         [_placesClient currentPlaceWithCallback:^(GMSPlaceLikelihoodList *
                                                   placeLikelihoodList,
@@ -164,8 +185,11 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
                         
                         Location *location = [[Location alloc] init];
                         location.name = place.name;
-                        location.latitude = [[NSNumber alloc] initWithFloat:place.coordinate.latitude];
-                        location.longitude = [[NSNumber alloc] initWithFloat:place.coordinate.longitude];
+                        location.addressLine = place.formattedAddress;
+                        location.latitude =
+                        [[NSNumber alloc] initWithFloat:place.coordinate.latitude];
+                        location.longitude =
+                        [[NSNumber alloc] initWithFloat:place.coordinate.longitude];
                         
                         DBManager *dbManager = [DBManager getSharedInstance];
                         location.id = [dbManager saveData:location];
@@ -180,7 +204,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
             }
             
         }];
+    }
+}
 
-    }
-    }
+- (void)loadĐ
+
 @end
