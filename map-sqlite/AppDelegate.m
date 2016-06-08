@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "AFNetworkActivityLogger.h"
 @import GoogleMaps;
 @interface AppDelegate ()
 
@@ -19,6 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [GMSServices provideAPIKey:@"AIzaSyC8P7oTgbWg-p9-Vr7zOMhEpCHTSQEHGlo"];
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
     return YES;
 }
 

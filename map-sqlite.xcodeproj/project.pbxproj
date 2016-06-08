@@ -182,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				7AF4C3B11D044DB80056A2A4 /* utils */,
-				7AD2385A1D03BB4F005EFDC5 /* api */,
 				7ACE60E01D0042BF00872958 /* db */,
 				7ACE60DF1D00429400872958 /* views */,
 				7ACE60DE1D00428C00872958 /* controllers */,
@@ -265,13 +264,6 @@
 				7ACA1B491CFC3955006785AD /* DBManager.m */,
 			);
 			name = db;
-			sourceTree = "<group>";
-		};
-		7AD2385A1D03BB4F005EFDC5 /* api */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = api;
 			sourceTree = "<group>";
 		};
 		7AF4C3B11D044DB80056A2A4 /* utils */ = {
@@ -358,6 +350,11 @@
 					7ACA1B0D1CFC2BAC006785AD = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = S8Q2VYLKGV;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					7ACA1B261CFC2BAC006785AD = {
 						CreatedOnToolsVersion = 7.3.1;

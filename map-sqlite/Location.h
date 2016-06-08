@@ -10,7 +10,7 @@
 
 @interface Location : NSObject
 
-@property (strong, nonatomic) NSNumber *id;
+@property (strong, nonatomic) NSString *id;
 
 @property (strong, nonatomic) NSString *name;
 

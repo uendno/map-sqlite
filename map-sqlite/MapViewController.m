@@ -38,7 +38,7 @@
     marker.position =
     CLLocationCoordinate2DMake([self.location.latitude floatValue],
                                [self.location.longitude floatValue]);
-    
+    marker.infoWindowAnchor = CGPointMake(1.85, 0);
     marker.map = self.mapView;
 }
 

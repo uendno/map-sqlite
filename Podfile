@@ -8,6 +8,7 @@ target 'map-sqlite' do
   # Pods for map-sqlite
 pod 'GoogleMaps'
 pod 'AFNetworking'
+pod 'AFNetworkActivityLogger', git: 'https://github.com/AFNetworking/AFNetworkActivityLogger.git', branch: '3_0_0'
 
   target 'map-sqliteTests' do
     inherit! :search_paths

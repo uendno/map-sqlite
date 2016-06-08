@@ -11,6 +11,9 @@
 #import "DBManager.h"
 #import "LocationCell.h"
 #import "MapViewController.h"
+#import "constants.h"
+
+#import "AFNetworking.h"
 
 @interface _LocationsTableViewController () <MapViewDelegate> {
     Location *_selectedLocation;
@@ -18,6 +21,7 @@
     GMSPlacesClient *_placesClient;
     BOOL _isWaitingForPlacePicker;
     LocationCell *_sampleCell;
+  
 }
 
 @end
@@ -35,8 +39,23 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     // find all data
-    DBManager *dbManager = [DBManager getSharedInstance];
-    self.locations = [dbManager findAll];
+    self.locations = [[NSMutableArray alloc] init];
+    
+    //refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor clearColor];
+    self.refreshControl.tintColor = [UIColor darkTextColor];
+    [self.refreshControl addTarget: self action:@selector(loadDataFromServer) forControlEvents:UIControlEventValueChanged];
+    
+   
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+   [self loadDataFromServer];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -116,10 +135,10 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 #pragma mark - MapViewDelegate
-- (void)deleteLocationID:(NSNumber *)locationId {
-    NSLog(@"%ld", (long)locationId);
+- (void)deleteLocationID:(NSString *)locationId {
+   
     for (Location *location in self.locations) {
-        if (location.id == locationId) {
+        if ([location.id isEqualToString:locationId]) {
             [self.locations removeObject:location];
             DBManager *dbManager = [DBManager getSharedInstance];
             [dbManager deleteDataWithId:location.id];
@@ -129,7 +148,7 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.locationTableView reloadData];
 }
 
-#pragma mark - Add Data
+#pragma mark - Change data
 - (IBAction)addLocation:(id)sender {
     
     if (_isWaitingForPlacePicker == NO) {
@@ -191,11 +210,41 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
                         location.longitude =
                         [[NSNumber alloc] initWithFloat:place.coordinate.longitude];
                         
-                        DBManager *dbManager = [DBManager getSharedInstance];
-                        location.id = [dbManager saveData:location];
                         
-                        [self.locations addObject:location];
-                        [self.locationTableView reloadData];
+                        NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+                        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:config];
+                        
+                        NSDictionary *postData = @{@"name" : location.name,
+                                                   @"address" : location.addressLine,
+                                                   @"latitude" : location.latitude,
+                                                   @"longitude" : location.longitude};
+                        
+                        NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:API_URL parameters:postData error:nil];
+                        
+                        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                            
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            } else {
+                                
+                                NSDictionary *result = (NSDictionary *)responseObject;
+                                
+                                if ((BOOL)result[@"success"] == YES) {
+                                    
+                                    location.id = result[@"_id"];
+                                    
+                                    DBManager *dbManager = [DBManager getSharedInstance];
+                                    [dbManager saveData:location];
+                                    
+                                    [self.locations addObject:location];
+                                    [self.locationTableView reloadData];
+                                }
+                                
+                                
+                            }
+                        }];
+                        
+                        [dataTask resume];
                         
                     } else {
                         NSLog(@"No place selected");
@@ -207,6 +256,75 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     }
 }
 
-- (void)loadĐ
+- (void)loadDataFromServer {
+    
+    DBManager *dbmanager = [DBManager getSharedInstance];
+    
+    //get last modified late in local db
+    NSString *date = [dbmanager getModifiedDate];
+    NSLog(@"DATE: %@", date);
+    
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:config];
+    
+   
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:API_URL parameters:nil error:nil];
+   
+    [request setValue:date forHTTPHeaderField:@"if_modified_since"];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        
+        [self.refreshControl endRefreshing];
+        
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            
+            NSDictionary *result = (NSDictionary *)responseObject;
+            
+            if ([[result valueForKey:@"success"] boolValue]== YES) {
+                NSArray *data = [result objectForKey:@"data"];
+                
+                if (data != nil) {
+                    
+                    [dbmanager deleteAllData];
+                    self.locations = [[NSMutableArray alloc] init];
+                    
+                    NSLog(@"Got data");
+                    
+                    for (NSDictionary *locationDict in data) {
+                        Location *location = [[Location alloc ]init];
+                        location.id = locationDict[@"_id"];
+                        location.name = locationDict[@"name"];
+                        location.addressLine = locationDict[@"address"];
+                        location.latitude = locationDict[@"latitude"];
+                        location.longitude = locationDict[@"longitude"];
+                        
+                        [self.locations addObject:location];
+                        [dbmanager saveData:location];
+                        
+                    }
+                    
+                  
+                    [dbmanager setModifiedDate: [result valueForKey:@"modified_since"]];
+                    
+                    [self.tableView reloadData];
+                } else {
+                    //null data
+                    NSLog(@"Null data");
+                }
+                
+            } else {
+                NSLog(@"%@", [result valueForKey:@"message"]);
+                self.locations = [dbmanager findAll];
+                [self.tableView reloadData];
+            }
+            
+            
+        }
+    }];
+    
+    [dataTask resume];
+}
 
 @end
