@@ -136,17 +136,52 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
 #pragma mark - MapViewDelegate
 - (void)deleteLocationID:(NSString *)locationId {
-   
-    for (Location *location in self.locations) {
-        if ([location.id isEqualToString:locationId]) {
-            [self.locations removeObject:location];
-            DBManager *dbManager = [DBManager getSharedInstance];
-            [dbManager deleteDataWithId:location.id];
-            break;
+    
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:config];
+    
+    NSString *deleteUrl = [API_URL stringByAppendingString:locationId];
+    
+    NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"DELETE" URLString:deleteUrl parameters:nil error:nil];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            
+            NSDictionary *result = (NSDictionary *)responseObject;
+            
+            if ([[result valueForKey:@"success" ] boolValue] == YES) {
+                
+                DBManager *dbManager = [DBManager getSharedInstance];
+                [dbManager setModifiedDate:result[@"modified_since"]];
+                
+                for (Location *location in self.locations) {
+                    if ([location.id isEqualToString:locationId]) {
+                        
+                        [dbManager deleteDataWithId:location.id];
+                        [self.locations removeObject:location];
+                        
+                        
+                        break;
+                    }
+                }
+                
+                [self.locationTableView reloadData];
+
+            } else {
+                NSLog(@"%@", result[@"message"]);
+            }
         }
+    }];
+    
+    [dataTask resume];
+
+    
+    
+   
     }
-    [self.locationTableView reloadData];
-}
 
 #pragma mark - Change data
 - (IBAction)addLocation:(id)sender {
@@ -229,12 +264,14 @@ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
                                 
                                 NSDictionary *result = (NSDictionary *)responseObject;
                                 
-                                if ((BOOL)result[@"success"] == YES) {
+                                if ([[result valueForKey:@"success" ] boolValue] == YES) {
                                     
                                     location.id = result[@"_id"];
-                                    
                                     DBManager *dbManager = [DBManager getSharedInstance];
                                     [dbManager saveData:location];
+                                    
+                                    
+                                    [dbManager setModifiedDate:result[@"modified_since"]];
                                     
                                     [self.locations addObject:location];
                                     [self.locationTableView reloadData];

@@ -81,21 +81,15 @@
                               style:UIAlertActionStyleDefault
                               handler:^(UIAlertAction *action) {
                                   
-                                  DBManager *dbManager = [DBManager getSharedInstance];
-                                  BOOL isSuccess = [dbManager deleteDataWithId:self.location.id];
-                                  if (isSuccess) {
-                                      NSLog(@"Deleted");
-                                      if ([self.delegate
-                                           respondsToSelector:@selector(deleteLocationID:)]) {
-                                          [self.delegate deleteLocationID:self.location.id];
-                                          
-                                          // back to the root view
-                                          [self.navigationController
-                                           popToRootViewControllerAnimated:YES];
-                                      }
-                                  } else {
-                                      NSLog(@"Not Deleted");
+                                  if ([self.delegate
+                                       respondsToSelector:@selector(deleteLocationID:)]) {
+                                      [self.delegate deleteLocationID:self.location.id];
+                                      
+                                      // back to the root view
+                                      [self.navigationController
+                                       popToRootViewControllerAnimated:YES];
                                   }
+                                  
                               }];
     
     UIAlertAction *cancel =

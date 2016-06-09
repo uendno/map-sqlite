@@ -98,7 +98,7 @@ static sqlite3_stmt *statement = nil;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         NSString *deleteSQL = [NSString
-                               stringWithFormat:@"delete from latlng where _id = %@", id];
+                               stringWithFormat:@"delete from latlng where _id = \"%@\"", id];
         const char *delete_stmt = [deleteSQL UTF8String];
         
         NSLog(@"%s", delete_stmt);
@@ -188,11 +188,11 @@ static sqlite3_stmt *statement = nil;
                 location.addressLine = address;
                 
                 NSNumber *lat = [[NSNumber alloc]
-                                 initWithFloat:(float)sqlite3_column_double(statement, 4)];
+                                 initWithFloat:(float)sqlite3_column_double(statement, 3)];
                 location.latitude = lat;
                 
                 NSNumber *lng = [[NSNumber alloc]
-                                 initWithFloat:(float)sqlite3_column_double(statement, 5)];
+                                 initWithFloat:(float)sqlite3_column_double(statement, 4)];
                 location.longitude = lng;
                 
                 [resultArray addObject:location];
@@ -228,11 +228,11 @@ static sqlite3_stmt *statement = nil;
                 location.addressLine = address;
                 
                 NSNumber *lat = [[NSNumber alloc]
-                                 initWithFloat:(float)sqlite3_column_double(statement, 4)];
+                                 initWithFloat:(float)sqlite3_column_double(statement, 3)];
                 location.latitude = lat;
                 
                 NSNumber *lng = [[NSNumber alloc]
-                                 initWithFloat:(float)sqlite3_column_double(statement, 5)];
+                                 initWithFloat:(float)sqlite3_column_double(statement, 4)];
                 location.longitude = lng;
                 
                 [resultArray addObject:location];
@@ -249,13 +249,13 @@ static sqlite3_stmt *statement = nil;
     const char *dbpath = [databasePath UTF8String];
     if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
         
-        NSLog(@"UPDATING DATE");
+        NSLog(@"UPDATING DATE %@", date);
         
         NSString *updateSQL = [NSString
-                               stringWithFormat:@"update version set modified_since = \"%@\" where name = \"%@\"", date, @"latlng"];
+                               stringWithFormat:@"update version set modified_since = \"%@\" where db_name = \"%@\"", date, @"latlng"];
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(database, update_stmt, -1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE) {
+        if (sqlite3_step(statement) == SQLITE_ROW) {
             //if update completed
             NSLog(@"UPDATED DATE");
             sqlite3_reset(statement);

@@ -181,9 +181,9 @@
 		7ACA1B101CFC2BAC006785AD /* map-sqlite */ = {
 			isa = PBXGroup;
 			children = (
+				7ACE60DF1D00429400872958 /* views */,
 				7AF4C3B11D044DB80056A2A4 /* utils */,
 				7ACE60E01D0042BF00872958 /* db */,
-				7ACE60DF1D00429400872958 /* views */,
 				7ACE60DE1D00428C00872958 /* controllers */,
 				7ACE60DD1D00428500872958 /* models */,
 				7ACA1B141CFC2BAC006785AD /* AppDelegate.h */,
