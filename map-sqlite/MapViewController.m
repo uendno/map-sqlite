@@ -77,7 +77,7 @@
                                 preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *confirm = [UIAlertAction
-                              actionWithTitle:@"YES"
+                              actionWithTitle:@"Delete"
                               style:UIAlertActionStyleDefault
                               handler:^(UIAlertAction *action) {
                                   
@@ -93,12 +93,13 @@
                               }];
     
     UIAlertAction *cancel =
-    [UIAlertAction actionWithTitle:@"NO"
+    [UIAlertAction actionWithTitle:@"Cancel"
                              style:UIAlertActionStyleCancel
                            handler:nil];
     
-    [alert addAction:confirm];
     [alert addAction:cancel];
+    [alert addAction:confirm];
+    
     [self presentViewController:alert animated:YES completion:nil];
 }
 @end

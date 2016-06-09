@@ -22,26 +22,26 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="71"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" misplaced="YES" text="Name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="400" translatesAutoresizingMaskIntoConstraints="NO" id="Tnh-9q-PDY">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="f3f-bp-eSx">
+                                            <rect key="frame" x="14" y="37" width="230" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" misplaced="YES" text="Name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="Tnh-9q-PDY">
                                             <rect key="frame" x="14" y="8" width="230" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="270" translatesAutoresizingMaskIntoConstraints="NO" id="f3f-bp-eSx">
-                                            <rect key="frame" x="14" y="37" width="230" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="f3f-bp-eSx" secondAttribute="trailing" constant="6" id="Brv-tg-mKn"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="f3f-bp-eSx" secondAttribute="bottom" id="KUy-wU-a3R"/>
+                                        <constraint firstItem="f3f-bp-eSx" firstAttribute="top" secondItem="Tnh-9q-PDY" secondAttribute="bottom" constant="6" id="P43-Pd-FtI"/>
                                         <constraint firstItem="f3f-bp-eSx" firstAttribute="leading" secondItem="kD4-XT-bKR" secondAttribute="leadingMargin" constant="6" id="SDI-iA-EAF"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Tnh-9q-PDY" secondAttribute="trailing" constant="6" id="W0D-j5-6qZ"/>
                                         <constraint firstAttribute="topMargin" secondItem="Tnh-9q-PDY" secondAttribute="top" id="akT-AU-dwM"/>
-                                        <constraint firstItem="f3f-bp-eSx" firstAttribute="top" secondItem="Tnh-9q-PDY" secondAttribute="bottom" constant="8" id="t4z-G0-AyA"/>
                                         <constraint firstItem="Tnh-9q-PDY" firstAttribute="leading" secondItem="kD4-XT-bKR" secondAttribute="leadingMargin" constant="6" id="xyc-MB-GWK"/>
                                     </constraints>
                                 </tableViewCellContentView>
